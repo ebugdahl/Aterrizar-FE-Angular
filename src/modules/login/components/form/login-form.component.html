@@ -7,4 +7,6 @@
     <input id="password" type="password" formControlName="password">
 
     <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+
+    <label id="invalidCredentials" [hidden]="!invalidCredentialsLabelShown">Incorrect username or password</label>
 </form>

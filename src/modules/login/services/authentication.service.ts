@@ -6,14 +6,14 @@ import { LoginModel } from '../models/login-model';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService{
+export class AuthenticationService{
 
   private BASE_URL : string = ''
 
   constructor(private httpClient : HttpClient) { }
 
   LogIn(username : string, password: string ) : Observable<LoginModel> {
-    let loginModel = new LoginModel()
+    let loginModel = new LoginModel();
     loginModel.token = 'askld1u9023';
     return of(loginModel);
   }

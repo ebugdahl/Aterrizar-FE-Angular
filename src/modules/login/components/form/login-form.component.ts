@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginModel } from '../../models/login-model';
-import { LoginService} from '../../services/login-service.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +15,9 @@ export class LoginFormComponent implements OnInit {
     password : new FormControl('', Validators.required)
   });
 
-  constructor(private loginService : LoginService) { }
+  invalidCredentialsLabelShown : boolean = false;
+
+  constructor(private authenticationServer : AuthenticationService) { }
 
   ngOnInit(): void {
 
@@ -23,23 +25,27 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() : void {
 
-    let username = this.loginForm.controls['username'].value;
-    let password = this.loginForm.controls['password'].value;
+    this.invalidCredentialsLabelShown = false;
 
-    this.loginService.LogIn('', '').subscribe(response => {
+    let form = this.loginForm.getRawValue();
+
+    this.authenticationServer.LogIn(form.username ?? '', form.password ?? '').subscribe(response => {
       this.checkResponse(response);
     });
   }
   private checkResponse(response: LoginModel) {
-    if(!response.token)
-      this.handleError('Login failed');
+    console.log(response.token);
+    if(!response.token){
+      this.handleError();
+      return;
+    }
 
     alert('Welcome');
   }
 
 
-  private handleError(err: any) {
-    console.log(err);
+  private handleError() {
+    this.invalidCredentialsLabelShown = true;
   }
 }
 
