@@ -105,3 +105,6 @@ dist
 
 # Mac shit
 .DS_Store
+
+# Angular
+.angular
