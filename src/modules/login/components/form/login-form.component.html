@@ -1,12 +1,16 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-    <label for="username">Username</label>
-    <input id="username" type="text" formControlName="username">
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
 
-    <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+    <button id="submit_button" mat-button type="submit" [disabled]="!loginForm.valid">Submit</button>
 
-    <label id="invalidCredentials" [hidden]="!invalidCredentialsLabelShown">Incorrect username or password</label>
+    <label id="invalid_credentials" [hidden]="!invalidCredentialsLabelShown">Incorrect username or password</label>
 </form>

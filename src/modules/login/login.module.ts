@@ -5,6 +5,8 @@ import { LoginWrapperComponent } from './components/wrapper/login-wrapper.compon
 import { LoginRoutingModule } from './login-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class LoginModule { }
