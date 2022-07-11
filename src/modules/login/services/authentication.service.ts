@@ -10,11 +10,11 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService{
 
   private readonly BASE_URL : string = environment.api_url;
-  private readonly RESOURCE : string = 'users'
+  private readonly RESOURCE : string = '/auth/login'
 
   constructor(private httpClient : HttpClient) { }
 
   LogIn(username : string, password: string ) : Observable<LoginModel> {
-    return this.httpClient.get<LoginModel>(this.BASE_URL + this.RESOURCE);
+    return this.httpClient.post<LoginModel>(this.BASE_URL + this.RESOURCE, {email: username, password : password});
   }
 }
