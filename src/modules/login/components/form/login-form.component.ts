@@ -30,12 +30,12 @@ export class LoginFormComponent implements OnInit {
     let form = this.loginForm.getRawValue();
 
     this.authenticationServer.LogIn(form.username ?? '', form.password ?? '').subscribe(response => {
+      console.log(response);
       this.checkResponse(response);
     });
   }
   private checkResponse(response: LoginModel) {
-    console.log(response.token);
-    if(!response.token){
+    if(!response){
       this.handleError();
       return;
     }

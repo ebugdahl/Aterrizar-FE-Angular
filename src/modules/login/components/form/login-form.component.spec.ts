@@ -59,7 +59,7 @@ describe('LoginFormComponent', () => {
     // Arrange
     component.loginForm.controls['username'].setValue('username');
     component.loginForm.controls['password'].setValue('password');
-    let loginModel = new LoginModel();
+    let loginModel = null;
     fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
 
     // Act
