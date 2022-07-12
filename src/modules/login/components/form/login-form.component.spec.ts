@@ -7,11 +7,9 @@ import { of } from 'rxjs';
 import { LoginModel } from '../../models/login-model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import { LoginFormComponent } from './login-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -142,7 +140,7 @@ describe('LoginFormComponent', () => {
     component.onSubmit();
 
     // Assert
-    expect(localStorage.getItem('aterrizar-auth-token')).toBe(loginModel.Token);
+    expect(localStorage.getItem('aterrizar-auth-token')).toBe(loginModel.token);
   });
 
   it('navigates to / after login', () => {
