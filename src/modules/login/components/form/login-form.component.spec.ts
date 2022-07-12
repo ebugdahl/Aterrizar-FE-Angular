@@ -17,7 +17,7 @@ describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let loginModel = new LoginModel()
-  loginModel.Token = 'askld1u9023';
+  loginModel.token = 'askld1u9023';
   var fakeAuthenticationService : AuthenticationService;
   let router: Router;
 
@@ -49,6 +49,7 @@ describe('LoginFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
+    localStorage.clear();
     spyOn(router, 'navigate');
   });
 
@@ -131,11 +132,23 @@ describe('LoginFormComponent', () => {
     expect(label.nativeElement.hidden).toBe(false);
   });
 
+  it('inserts token into local storage after login', () => {
+    // Arrange
+    component.loginForm.controls['email'].setValue('username@user.com');
+    component.loginForm.controls['password'].setValue('password');
+    fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
+    
+    // Act
+    component.onSubmit();
+
+    // Assert
+    expect(localStorage.getItem('aterrizar-auth-token')).toBe(loginModel.Token);
+  });
+
   it('navigates to / after login', () => {
     // Arrange & Act
     component.loginForm.controls['email'].setValue('username@user.com');
     component.loginForm.controls['password'].setValue('password');
-    let loginModel = new LoginModel();
     fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
     
     // Act

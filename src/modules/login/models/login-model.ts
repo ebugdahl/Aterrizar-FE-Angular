@@ -1,7 +1,7 @@
 export class LoginModel {
-    Id : string = '';
-    FistName : string = '';
-    LastName : string = '';
-    Token : string = '';
-    Email : string = '';
+    id : string = '';
+    fistName : string = '';
+    lastName : string = '';
+    token : string = '';
+    email : string = '';
 }
