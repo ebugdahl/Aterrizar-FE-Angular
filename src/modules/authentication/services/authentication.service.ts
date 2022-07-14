@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoginModel } from '../models/login-model';
 import { environment } from 'src/environments/environment';
 

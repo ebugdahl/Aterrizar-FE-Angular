@@ -18,6 +18,6 @@ import { UiModule } from 'src/modules/ui/ui.module';
     UiModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
