@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginWrapperComponent } from './components/wrapper/login-wrapper.component';
+import { LoginWrapperComponent } from './components/login/wrapper/login-wrapper.component';
 
 const routes: Routes = [
     {
@@ -13,4 +13,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
   })
-  export class LoginRoutingModule { }
+  export class AuthenticationRoutingModule { }

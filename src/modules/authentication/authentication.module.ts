@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginFormComponent } from './components/form/login-form.component';
-import { LoginWrapperComponent } from './components/wrapper/login-wrapper.component';
-import { LoginRoutingModule } from './login-routing.module';
+import { LoginFormComponent } from './components/login/form/login-form.component';
+import { LoginWrapperComponent } from './components/login/wrapper/login-wrapper.component';
+import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input'
@@ -15,11 +15,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    AuthenticationRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule
   ]
 })
-export class LoginModule { }
+export class AuthenticatonModule { }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginModule } from '../modules/login/login.module';
+import { AuthenticatonModule } from '../modules/authentication/authentication.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiModule } from 'src/modules/ui/ui.module';
 
@@ -13,7 +13,7 @@ import { UiModule } from 'src/modules/ui/ui.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
+    AuthenticatonModule,
     BrowserAnimationsModule,
     UiModule
   ],
