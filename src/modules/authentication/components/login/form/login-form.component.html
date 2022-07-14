@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="login__form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <h3>Ingresa con tu usuario</h3>
+
+      <div class="form__field__container" [hidden]="!invalidCredentialsLabelShown">
+        <div class="error__label">
+          <label id="invalid_credentials">Incorrect username or password</label>
+        </div>
+      </div>
+  
+      <div class="form__field__container">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+      </div>
+  
+      <div class="form__field__container">
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+      </div>
+  
+      <div class="form__field__container">
+        <button id="submit_button" class="login__button" mat-button type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+      </div>
+    </form>
+  </div>
+</div>
