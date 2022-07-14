@@ -3,10 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginWrapperComponent } from './components/login/wrapper/login-wrapper.component';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: LoginWrapperComponent
-    }
+    { path: 'login', component: LoginWrapperComponent },
+
   ];
   
   @NgModule({
