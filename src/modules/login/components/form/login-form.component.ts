@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { LoginModel } from '../../models/login-model';
 import { AuthenticationService } from '../../services/authentication.service';
 
@@ -12,7 +12,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
-  private subscriptions : Subscription[] = [];
+  private subjects : Subject<void> = new Subject();
 
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -22,16 +22,14 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   invalidCredentialsLabelShown : boolean = false;
 
   constructor(private authenticationServer : AuthenticationService, private router : Router) { }
-  
 
   ngOnInit(): void {
 
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => {
-      sub.unsubscribe();
-    })
+    this.subjects.next();
+    this.subjects.complete();
   }
 
   onSubmit() : void {
@@ -43,8 +41,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     let form = this.loginForm.getRawValue();
 
-    this.subscriptions.push(
-      this.authenticationServer.LogIn(form.email ?? '', form.password ?? '').subscribe({
+      this.authenticationServer.LogIn(form.email ?? '', form.password ?? '').pipe(takeUntil(this.subjects)).subscribe({
         next: response => {
 
           if(!response) {
@@ -55,8 +52,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
         },
         error : () => this.handleError()
-      })
-    );
+      });
 
   }
 

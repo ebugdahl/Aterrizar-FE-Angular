@@ -14,8 +14,14 @@ import { Router } from '@angular/router';
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
-  let loginModel = new LoginModel()
-  loginModel.token = 'askld1u9023';
+  let loginModel : LoginModel = 
+  {
+    token : 'askld1u9023',
+    email : '',
+    fistName : '',
+    id : '',
+    lastName : ''
+  };
   var fakeAuthenticationService : AuthenticationService;
   let router: Router;
 
