@@ -5,17 +5,19 @@ import { AppComponent } from './app.component';
 import { AuthenticatonModule } from '../modules/authentication/authentication.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiModule } from 'src/modules/ui/ui.module';
+import { CoreModule } from 'src/modules/core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthenticatonModule,
     BrowserAnimationsModule,
-    UiModule
+    UiModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],

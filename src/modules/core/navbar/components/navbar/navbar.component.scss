@@ -1,0 +1,29 @@
+.navbar__container{
+    padding: 20px;
+    position: sticky;
+    height: 2rem;
+    background-color: white;
+
+    .brand__container{
+        font-size: 25px;
+        color: #550fed;
+        font-weight: bold;
+        display: inline-flex;
+        width: 30%;
+
+        img {
+            margin-right: 7px;
+        }
+
+        a {
+            vertical-align: super;
+            padding-top: 4px;
+        }
+    }
+
+    .avatar__container{
+        width: 10%;
+        float: right;
+        display: inline-flex;
+    }
+}
