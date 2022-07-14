@@ -13,11 +13,14 @@
 
         img {
             margin-right: 7px;
+            cursor: pointer;
         }
 
         a {
             vertical-align: super;
             padding-top: 4px;
+            text-decoration:  none;
+            color:inherit
         }
     }
 

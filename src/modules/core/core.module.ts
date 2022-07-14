@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NavBarComponent } from './navbar/components/navbar/navbar.component';
 import { UserAvatarComponent } from './navbar/components/user-avatar/user-avatar.component';
 @NgModule({
@@ -7,6 +8,7 @@ import { UserAvatarComponent } from './navbar/components/user-avatar/user-avatar
     NavBarComponent
   ],
   imports: [
+    RouterModule
   ],
   exports: [
     NavBarComponent
