@@ -61,7 +61,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   private hangleSuccessLogin(response : LoginModel) {
-    console.log(response.token);
     localStorage.setItem('aterrizar-auth-token', response.token);
     this.router.navigate(['/']);
   }
