@@ -1,5 +1,11 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoginFormComponent } from '../form/login-form.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginWrapperComponent } from './login-wrapper.component';
 
 describe('LoginWrapperComponent', () => {
@@ -8,7 +14,8 @@ describe('LoginWrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginWrapperComponent ]
+      declarations: [ LoginWrapperComponent, LoginFormComponent ],
+      imports : [ RouterTestingModule, HttpClientTestingModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, NoopAnimationsModule ]
     })
     .compileComponents();
 

@@ -43,7 +43,7 @@ describe('LoginFormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         NoopAnimationsModule,
-        RouterTestingModule.withRoutes([])
+        RouterTestingModule.withRoutes([]),
       ]
     })
     .compileComponents();
