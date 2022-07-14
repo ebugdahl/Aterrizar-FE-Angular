@@ -38,12 +38,26 @@ describe('NavbarComponent', () => {
          expect(link.nativeElement.innerText).toBe('Aterrizar');
     });
 
-    // it('when clicking on logo navigates to root path', ()=> {
+    it('when clicking on logo navigates to root path', () => {
+        // Arrange
+        let img = fixture.debugElement.query(By.css('img'));
 
-    // });
+        // Act
+        let pathToRedirect = img.nativeElement.getAttribute('ng-reflect-router-link');
 
-    // it('when clicking on company name navigates to root path', () => {
+        // Assert
+        expect(pathToRedirect).toBe('/');
+    });
 
-    // });
+    it('when clicking on company name navigates to root path', () => {
+        // Arrange
+        let link = fixture.debugElement.query(By.css('a'));
+
+        // Act
+        let href = link.nativeElement.getAttribute('href');
+
+        // Assert
+        expect(href).toBe('/');
+    });
 
 });
