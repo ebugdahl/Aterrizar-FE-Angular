@@ -18,7 +18,7 @@ describe('LoginFormComponent', () => {
   {
     token : 'askld1u9023',
     email : '',
-    fistName : '',
+    firstName : '',
     id : '',
     lastName : ''
   };
@@ -27,8 +27,10 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
 
-    fakeAuthenticationService = jasmine.createSpyObj('fakeAuthenticationService', {
-      'LogIn' : of(loginModel)
+    fakeAuthenticationService = jasmine.createSpyObj('fakeAuthenticationService', 
+    {
+      'LogIn' : of(loginModel),
+      'NotifyChanges' : {}
     });
 
     await TestBed.configureTestingModule({

@@ -1,8 +1,11 @@
 .navbar__container{
-    padding: 20px;
+    padding: 0px 20px;
     position: sticky;
-    height: 2rem;
+    height: 4rem;
     background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .brand__container{
         font-size: 25px;
@@ -10,6 +13,7 @@
         font-weight: bold;
         display: inline-flex;
         width: 30%;
+        height: 50%;
 
         img {
             margin-right: 7px;
@@ -25,7 +29,7 @@
     }
 
     .avatar__container{
-        width: 10%;
+        width: 15%;
         float: right;
         display: inline-flex;
     }
