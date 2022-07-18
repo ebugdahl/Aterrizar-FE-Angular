@@ -59,6 +59,10 @@ describe('LoginFormComponent', () => {
     spyOn(router, 'navigate');
   });
 
+  afterEach(() => {
+    localStorage.clear();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -178,7 +182,7 @@ describe('LoginFormComponent', () => {
   });
 
   it('navigates to / after login', () => {
-    // Arrange & Act
+    // Arrange
     component.loginForm.controls['email'].setValue('username@user.com');
     component.loginForm.controls['password'].setValue('password');
     fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
@@ -189,4 +193,16 @@ describe('LoginFormComponent', () => {
     // Assert
     expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
+
+  it('navigates to / if the user is already logged in', () => {
+    // Arrange
+    localStorage.setItem('aterrizar-auth-token', 'asdasdasd');
+    
+    // Act
+    component.ngOnInit();
+
+    // Assert
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
+  });
+
 });

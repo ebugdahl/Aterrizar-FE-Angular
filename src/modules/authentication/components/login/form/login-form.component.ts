@@ -13,6 +13,8 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class LoginFormComponent implements OnInit, OnDestroy {
 
   private subjects : Subject<void> = new Subject();
+  private readonly AUTH_TOKEN_LOCAL_STORAGE_KEY : string = 'aterrizar-auth-token';
+  private readonly USER_LOCAL_STORAGE_KEY : string = 'user';
 
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -24,7 +26,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   constructor(private authenticationServer : AuthenticationService, private router : Router) { }
 
   ngOnInit(): void {
-
+    const token = localStorage.getItem(this.AUTH_TOKEN_LOCAL_STORAGE_KEY);
+    if(token)
+      this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
@@ -58,8 +62,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   private hangleSuccessLogin(response : LoginModel) {
     this.authenticationServer.NotifyChanges(response);
-    localStorage.setItem('aterrizar-auth-token', response.token);
-    localStorage.setItem('user', JSON.stringify(response));
+    localStorage.setItem(this.AUTH_TOKEN_LOCAL_STORAGE_KEY, response.token);
+    localStorage.setItem(this.USER_LOCAL_STORAGE_KEY, JSON.stringify(response));
     this.router.navigate(['/']);
   }
 
