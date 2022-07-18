@@ -151,6 +151,32 @@ describe('LoginFormComponent', () => {
     expect(localStorage.getItem('aterrizar-auth-token')).toBe(loginModel.token);
   });
 
+  it('inserts whose user into local storage after login', () => {
+    // Arrange
+    component.loginForm.controls['email'].setValue('username@user.com');
+    component.loginForm.controls['password'].setValue('password');
+    fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
+    
+    // Act
+    component.onSubmit();
+
+    // Assert
+    expect(localStorage.getItem('user')).toBe(JSON.stringify(loginModel));
+  });
+
+  it('notifies successful login', () => {
+    // Arrange
+    component.loginForm.controls['email'].setValue('username@user.com');
+    component.loginForm.controls['password'].setValue('password');
+    fakeAuthenticationService.LogIn = jasmine.createSpy().and.returnValue(of(loginModel));
+    
+    // Act
+    component.onSubmit();
+
+    // Assert
+    expect(fakeAuthenticationService.NotifyChanges).toHaveBeenCalledOnceWith(loginModel);
+  });
+
   it('navigates to / after login', () => {
     // Arrange & Act
     component.loginForm.controls['email'].setValue('username@user.com');
