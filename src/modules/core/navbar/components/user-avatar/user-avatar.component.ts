@@ -12,14 +12,15 @@ import { AuthenticationService } from "src/modules/authentication/services/authe
 })
 export class UserAvatarComponent implements OnDestroy
 {
+    private unloggedUserName : string = 'Iniciar Sesión';   
+    private unloggedLinkRoute : string [] = ['/authentication/login']
     faUser = faUser;
-    username : string = 'Iniciar Sesión';
+    username : string = this.unloggedUserName;
+    linkRoute : string[] = this.unloggedLinkRoute;
     loggedIn : boolean = false;
-    linkRoute : string[] = ['/authentication/login'];
     
     private subjects : Subject<void> = new Subject();
-    
-    constructor(authenticationService : AuthenticationService) {
+    constructor(private authenticationService : AuthenticationService) {
         let storedUser = localStorage.getItem('user');
 
         if(storedUser){
@@ -40,10 +41,20 @@ export class UserAvatarComponent implements OnDestroy
         this.subjects.complete();
     }
 
+    onSignOutClick() : void {
+        this.authenticationService.SingOut();
+    }
+
     private setLoggedInUser(data : LoginModel){
         if(data.token){
             this.username = `${data.firstName} ${data.lastName}`;
             this.linkRoute = [];
+            this.loggedIn = true;
+        }
+        else {
+            this.username = this.unloggedUserName;
+            this.linkRoute = this.unloggedLinkRoute;
+            this.loggedIn = false;
         }
     }
 }

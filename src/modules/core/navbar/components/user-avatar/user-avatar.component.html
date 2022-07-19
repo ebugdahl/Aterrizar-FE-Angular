@@ -1,4 +1,9 @@
-<button class="avatar__button">
+<button id="menu_button" [matMenuTriggerFor]="menu" class="avatar__button" [disabled]="!loggedIn">
     <fa-icon [icon]="faUser" size="2x"></fa-icon>
 </button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Cuenta</button>
+    <button id="sign_out" mat-menu-item (click)="onSignOutClick()">Cerrar Sesión</button>
+  </mat-menu>
+
 <a [routerLink]="linkRoute">{{username}}</a> 

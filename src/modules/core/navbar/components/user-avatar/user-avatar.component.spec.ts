@@ -99,4 +99,47 @@ describe('UserAvatarComponent', () => {
         // Assert
         expect(href).toBe('/authentication/login');
     });
+
+    it('clicking sign out button triggers sigout process', () => {
+        // Arrange
+        const button = fixture.debugElement.query(By.css('#sign_out'));
+
+        // Act
+        button.nativeElement.click();
+
+        // Assert
+        expect(fakeAuthenticationService.SingOut()).toHaveBeenCalled();
+    });
+
+    it('menu button is disabled if user is not logged in', () => {
+         // Arrange
+         const button = fixture.debugElement.query(By.css('#menu_button'));
+
+         // Act
+         const disabled = button.nativeElement.disabled;
+ 
+         // Assert
+         expect(disabled).toBeTrue();
+    });
+    
+    it('menu button is enabled if user is logged in', () => {
+        // Arrange
+        const loginModel : LoginModel = {
+            lastName : 'lastname',
+            email : 'email',
+            firstName : 'firstname',
+            id : 'asd',
+            token : 'token'
+        };
+
+        fakeAuthenticationService.NotifyChanges(loginModel);
+
+        const button = fixture.debugElement.query(By.css('#menu_button'));
+
+        // Act
+        const disabled = button.nativeElement.disabled;
+
+        // Assert
+        expect(disabled).toBeFalse();
+   });
 });
