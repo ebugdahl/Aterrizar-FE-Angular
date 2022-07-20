@@ -8,6 +8,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { RouterTestingModule } from "@angular/router/testing";
 import { UiModule } from "src/modules/ui/ui.module";
+import { MatButtonModule } from "@angular/material/button";
+import { MatMenuModule } from "@angular/material/menu";
+import { BehaviorSubject } from "rxjs";
 
 describe('UserAvatarComponent', () => {
 
@@ -15,17 +18,20 @@ describe('UserAvatarComponent', () => {
     let component : UserAvatarComponent;
     let fixture : ComponentFixture<UserAvatarComponent>;
 
+
     beforeEach(async ()=> {
         await TestBed.configureTestingModule({
             declarations : [UserAvatarComponent],
             imports: [ 
-                FontAwesomeModule,
                 HttpClientTestingModule,
                 RouterTestingModule,
-                UiModule
+                MatButtonModule, 
+                MatMenuModule,
+                UiModule,
+                FontAwesomeModule,
              ],
              providers: [
-                AuthenticationService,
+                { provide : AuthenticationService, useClass : FakeAuthenticationService},
              ],
              schemas : [NO_ERRORS_SCHEMA]
 
@@ -56,6 +62,7 @@ describe('UserAvatarComponent', () => {
         
         // Act
         fakeAuthenticationService.NotifyChanges(loginModel);
+        fixture.detectChanges();
 
         // Assert
         expect(link.nativeElement.innerHTML).toBe('firstname lastname');
@@ -100,15 +107,15 @@ describe('UserAvatarComponent', () => {
         expect(href).toBe('/authentication/login');
     });
 
-    it('clicking sign out button triggers sigout process', () => {
-        // Arrange
-        const button = fixture.debugElement.query(By.css('#sign_out'));
-
+    it('sign out button triggers sigout process', () => {
+        // Arrange 
+        spyOn(fakeAuthenticationService, 'SignOut').and.callThrough();
+        
         // Act
-        button.nativeElement.click();
+        component.onSignOutClick();
 
         // Assert
-        expect(fakeAuthenticationService.SingOut()).toHaveBeenCalled();
+        expect(fakeAuthenticationService.SignOut).toHaveBeenCalled();
     });
 
     it('menu button is disabled if user is not logged in', () => {
@@ -133,6 +140,8 @@ describe('UserAvatarComponent', () => {
         };
 
         fakeAuthenticationService.NotifyChanges(loginModel);
+        
+        fixture.detectChanges();
 
         const button = fixture.debugElement.query(By.css('#menu_button'));
 
@@ -143,3 +152,17 @@ describe('UserAvatarComponent', () => {
         expect(disabled).toBeFalse();
    });
 });
+
+class FakeAuthenticationService { 
+    public loginSubject : BehaviorSubject<LoginModel> = new  BehaviorSubject({email : '', firstName : '', id : '', lastName : '', token : ''});
+
+    public signOutCalls : number = 0;
+
+    NotifyChanges(loginModel : LoginModel) : void {
+        this.loginSubject.next(loginModel);
+    }
+
+    SignOut() : void {
+        this.signOutCalls ++;
+    }
+}

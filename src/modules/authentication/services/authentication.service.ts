@@ -25,7 +25,7 @@ export class AuthenticationService{
     this.loginSubject.next(loginModel);
   }
 
-  SingOut() {      
+  SignOut() {      
         localStorage.removeItem(this.AUTH_TOKEN_LOCAL_STORAGE_KEY);
         localStorage.removeItem(this.USER_LOCAL_STORAGE_KEY);
         this.loginSubject.next({email : '', firstName : '', id : '', lastName : '', token : ''});

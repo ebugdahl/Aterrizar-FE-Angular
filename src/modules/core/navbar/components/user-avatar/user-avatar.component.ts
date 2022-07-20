@@ -21,11 +21,6 @@ export class UserAvatarComponent implements OnDestroy
     
     private subjects : Subject<void> = new Subject();
     constructor(private authenticationService : AuthenticationService) {
-        let storedUser = localStorage.getItem('user');
-
-        if(storedUser){
-            this.setLoggedInUser(JSON.parse(storedUser));
-        }
 
         authenticationService.loginSubject
             .asObservable()
@@ -34,6 +29,12 @@ export class UserAvatarComponent implements OnDestroy
                 this.setLoggedInUser(data);
             }
         );
+
+        let storedUser = localStorage.getItem('user');
+
+        if(storedUser){
+            this.setLoggedInUser(JSON.parse(storedUser));
+        }
     }
 
     ngOnDestroy(): void {
@@ -42,7 +43,7 @@ export class UserAvatarComponent implements OnDestroy
     }
 
     onSignOutClick() : void {
-        this.authenticationService.SingOut();
+        this.authenticationService.SignOut();
     }
 
     private setLoggedInUser(data : LoginModel){

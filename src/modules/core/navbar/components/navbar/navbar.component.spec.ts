@@ -1,5 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
@@ -16,7 +18,9 @@ describe('NavbarComponent', () => {
         ],
         imports: [
             RouterTestingModule,
-            HttpClientModule
+            HttpClientModule,
+            MatButtonModule,
+            MatMenuModule
         ]
        }).compileComponents();
 
