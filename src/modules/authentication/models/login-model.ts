@@ -1,6 +1,6 @@
 export interface LoginModel {
     id : string;
-    fistName : string;
+    firstName : string;
     lastName : string;
     token : string;
     email : string;

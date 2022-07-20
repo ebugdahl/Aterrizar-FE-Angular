@@ -13,7 +13,6 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class LoginFormComponent implements OnInit, OnDestroy {
 
   private subjects : Subject<void> = new Subject();
-
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
     password : new FormControl('', Validators.required)
@@ -21,10 +20,12 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   invalidCredentialsLabelShown : boolean = false;
 
-  constructor(private authenticationServer : AuthenticationService, private router : Router) { }
+  constructor(private authenticationService : AuthenticationService, private router : Router) { }
 
   ngOnInit(): void {
-
+    const token = localStorage.getItem(this.authenticationService.AUTH_TOKEN_LOCAL_STORAGE_KEY);
+    if(token)
+      this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
@@ -41,7 +42,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     let form = this.loginForm.getRawValue();
 
-      this.authenticationServer.LogIn(form.email ?? '', form.password ?? '').pipe(takeUntil(this.subjects)).subscribe({
+      this.authenticationService.LogIn(form.email ?? '', form.password ?? '').pipe(takeUntil(this.subjects)).subscribe({
         next: response => {
 
           if(!response) {
@@ -57,7 +58,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   private hangleSuccessLogin(response : LoginModel) {
-    localStorage.setItem('aterrizar-auth-token', response.token);
+    this.authenticationService.NotifyChanges(response);
+    localStorage.setItem(this.authenticationService.AUTH_TOKEN_LOCAL_STORAGE_KEY, response.token);
+    localStorage.setItem(this.authenticationService.USER_LOCAL_STORAGE_KEY, JSON.stringify(response));
     this.router.navigate(['/']);
   }
 

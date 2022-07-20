@@ -1,0 +1,36 @@
+.navbar__container{
+    padding: 0px 20px;
+    position: sticky;
+    height: 4rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .brand__container{
+        font-size: 25px;
+        color: #550fed;
+        font-weight: bold;
+        display: inline-flex;
+        width: 30%;
+        height: 50%;
+
+        img {
+            margin-right: 7px;
+            cursor: pointer;
+        }
+
+        a {
+            vertical-align: super;
+            padding-top: 4px;
+            text-decoration:  none;
+            color:inherit
+        }
+    }
+
+    .avatar__container{
+        width: 15%;
+        float: right;
+        display: inline-flex;
+    }
+}
